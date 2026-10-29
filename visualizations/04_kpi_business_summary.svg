@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="kpiBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="blueCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+    <linearGradient id="emeraldCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#064e3b"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <linearGradient id="purpleCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4c1d95"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="500" rx="16" fill="url(#kpiBg)"/>
+
+  <text x="40" y="50" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="700" fill="#f8fafc">Automated Reporting: Validated Business Insights</text>
+  <text x="40" y="76" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#94a3b8">Revenue and demand distribution derived automatically from the clean production dataset</text>
+
+  <!-- KPI Top Cards -->
+  <g transform="translate(40, 105)">
+    <!-- Card 1 -->
+    <rect width="260" height="85" rx="10" fill="#1e293b" stroke="#334155"/>
+    <text x="20" y="30" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#94a3b8">TOTAL AUDITED REVENUE</text>
+    <text x="20" y="65" font-family="system-ui, -apple-system, sans-serif" font-size="26" font-weight="800" fill="#38bdf8">$112,961.90</text>
+
+    <!-- Card 2 -->
+    <rect x="280" width="260" height="85" rx="10" fill="#1e293b" stroke="#334155"/>
+    <text x="300" y="30" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#94a3b8">CLEAN ORDER COUNT</text>
+    <text x="300" y="65" font-family="system-ui, -apple-system, sans-serif" font-size="26" font-weight="800" fill="#34d399">950 Orders</text>
+
+    <!-- Card 3 -->
+    <rect x="560" width="260" height="85" rx="10" fill="#1e293b" stroke="#334155"/>
+    <text x="580" y="30" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#94a3b8">AVG ORDER VALUE (AOV)</text>
+    <text x="580" y="65" font-family="system-ui, -apple-system, sans-serif" font-size="26" font-weight="800" fill="#c084fc">$118.91</text>
+  </g>
+
+  <!-- Bottom Breakdown Charts -->
+  <g transform="translate(40, 220)">
+    <!-- Category Chart -->
+    <rect width="400" height="250" rx="12" fill="#1e293b" stroke="#334155"/>
+    <text x="20" y="32" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" fill="#f1f5f9">Revenue by Product Category</text>
+    
+    <g transform="translate(20, 55)">
+      <!-- Electronics -->
+      <text x="0" y="20" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#cbd5e1">Electronics</text>
+      <rect x="100" y="7" width="200" height="18" rx="4" fill="#38bdf8"/>
+      <text x="310" y="21" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#f8fafc">$67,320 (60%)</text>
+
+      <!-- Home & Kitchen -->
+      <text x="0" y="60" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#cbd5e1">Home &amp; Kitchen</text>
+      <rect x="100" y="47" width="75" height="18" rx="4" fill="#818cf8"/>
+      <text x="185" y="61" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#f8fafc">$25,140 (22%)</text>
+
+      <!-- Apparel -->
+      <text x="0" y="100" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#cbd5e1">Apparel</text>
+      <rect x="100" y="87" width="42" height="18" rx="4" fill="#ec4899"/>
+      <text x="152" y="101" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#f8fafc">$13,921 (12%)</text>
+
+      <!-- Books -->
+      <text x="0" y="140" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#cbd5e1">Books</text>
+      <rect x="100" y="127" width="20" height="18" rx="4" fill="#f59e0b"/>
+      <text x="130" y="141" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#f8fafc">$6,580 (6%)</text>
+    </g>
+
+    <!-- Geographic Chart -->
+    <rect x="420" width="400" height="250" rx="12" fill="#1e293b" stroke="#334155"/>
+    <text x="440" y="32" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700" fill="#f1f5f9">Orders by Standardized Country</text>
+
+    <g transform="translate(440, 55)">
+      <!-- United States -->
+      <text x="0" y="20" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#cbd5e1">United States</text>
+      <rect x="100" y="7" width="200" height="18" rx="4" fill="#10b981"/>
+      <text x="310" y="21" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#f8fafc">485 orders (51%)</text>
+
+      <!-- United Kingdom -->
+      <text x="0" y="60" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#cbd5e1">United Kingdom</text>
+      <rect x="100" y="47" width="78" height="18" rx="4" fill="#3b82f6"/>
+      <text x="188" y="61" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#f8fafc">190 orders (20%)</text>
+
+      <!-- Canada -->
+      <text x="0" y="100" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#cbd5e1">Canada</text>
+      <rect x="100" y="87" width="60" height="18" rx="4" fill="#a855f7"/>
+      <text x="170" y="101" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#f8fafc">145 orders (15%)</text>
+
+      <!-- Germany -->
+      <text x="0" y="140" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#cbd5e1">Germany</text>
+      <rect x="100" y="127" width="54" height="18" rx="4" fill="#f97316"/>
+      <text x="164" y="141" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#f8fafc">130 orders (14%)</text>
+    </g>
+  </g>
+</svg>

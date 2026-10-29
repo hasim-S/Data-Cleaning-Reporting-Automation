@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Cleaning & Quality Automation Dashboard | Thiranex Internship</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #090d16;
+      --bg-surface: #111827;
+      --bg-card: #1f2937;
+      --bg-hover: #374151;
+      --border: #374151;
+      --primary: #3b82f6;
+      --primary-glow: rgba(59, 130, 246, 0.25);
+      --emerald: #10b981;
+      --emerald-glow: rgba(16, 185, 129, 0.2);
+      --rose: #f43f5e;
+      --amber: #f59e0b;
+      --purple: #8b5cf6;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --font: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: var(--font);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    header {
+      background: rgba(17, 24, 39, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .brand { display: flex; align-items: center; gap: 14px; }
+    .logo-badge {
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 20px;
+      color: #fff;
+      box-shadow: 0 4px 14px var(--primary-glow);
+    }
+    .title-group h1 { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; }
+    .title-group p { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+    .header-badges { display: flex; gap: 10px; align-items: center; }
+    .badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .badge-intern { background: rgba(139, 92, 246, 0.15); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.3); }
+    .badge-success { background: var(--emerald-glow); color: var(--emerald); border: 1px solid rgba(16, 185, 129, 0.4); display: flex; align-items: center; gap: 6px; }
+    .pulse-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--emerald); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.85); } }
+
+    /* Layout */
+    main { max-width: 1440px; margin: 0 auto; padding: 32px 40px; width: 100%; display: flex; flex-direction: column; gap: 32px; }
+
+    /* KPI Cards */
+    .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+    .kpi-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .kpi-card:hover { transform: translateY(-3px); border-color: #4b5563; }
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+    }
+    .kpi-card.blue::before { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+    .kpi-card.emerald::before { background: linear-gradient(90deg, #10b981, #34d399); }
+    .kpi-card.purple::before { background: linear-gradient(90deg, #8b5cf6, #c084fc); }
+    .kpi-card.amber::before { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+
+    .kpi-label { font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .kpi-val { font-size: 32px; font-weight: 800; margin: 8px 0 4px 0; letter-spacing: -0.02em; font-family: var(--font-mono); }
+    .kpi-sub { font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+    .trend-up { color: var(--emerald); font-weight: 700; }
+    .trend-down { color: var(--rose); font-weight: 700; }
+
+    /* Quality Score Section */
+    .grid-2col { display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; }
+    @media (max-width: 960px) { .grid-2col { grid-template-columns: 1fr; } }
+
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+    }
+    .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .card-header h2 { font-size: 18px; font-weight: 800; letter-spacing: -0.01em; }
+
+    /* Dimension Bars */
+    .dim-list { display: flex; flex-direction: column; gap: 16px; margin-top: 12px; }
+    .dim-row { display: flex; flex-direction: column; gap: 6px; }
+    .dim-info { display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; }
+    .dim-track { height: 10px; background: #1f2937; border-radius: 999px; overflow: hidden; position: relative; }
+    .dim-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, #3b82f6, #10b981); transition: width 1s ease-in-out; }
+    .dim-fill-before { position: absolute; height: 100%; background: rgba(244, 63, 94, 0.4); border-radius: 999px; }
+
+    /* Audit Table */
+    .table-container { overflow-x: auto; margin-top: 12px; border: 1px solid var(--border); border-radius: 12px; }
+    table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; }
+    th { background: #1f2937; padding: 14px 18px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 0.05em; border-bottom: 1px solid var(--border); }
+    td { padding: 14px 18px; border-bottom: 1px solid var(--border); }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(31, 41, 55, 0.5); }
+    .pill { display: inline-block; padding: 4px 10px; border-radius: 6px; font-weight: 700; font-size: 11px; }
+    .pill-green { background: var(--emerald-glow); color: var(--emerald); }
+    .pill-blue { background: var(--primary-glow); color: var(--primary); }
+
+    /* Interactive Filter */
+    .filter-bar { display: flex; gap: 12px; margin-bottom: 16px; align-items: center; }
+    .filter-input {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-family: var(--font);
+      outline: none;
+      flex: 1;
+      max-width: 340px;
+    }
+    .filter-input:focus { border-color: var(--primary); }
+    .btn {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: #2563eb; }
+    .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-main); }
+    .btn-outline:hover { background: var(--bg-hover); }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 40px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <div class="logo-badge">Tx</div>
+      <div class="title-group">
+        <h1>Data Cleaning &amp; Quality Automation</h1>
+        <p>Thiranex Internship Project 4 • Automated Pipeline &amp; Executive Reporting</p>
+      </div>
+    </div>
+    <div class="header-badges">
+      <span class="badge badge-intern">Intern Portal: thiranex.in</span>
+      <span class="badge badge-success">
+        <span class="pulse-dot"></span> Pipeline Automated: Healthy
+      </span>
+    </div>
+  </header>
+
+  <main>
+    <!-- KPI Row -->
+    <div class="kpi-row">
+      <div class="kpi-card blue">
+        <div class="kpi-label">Ingested Raw Records</div>
+        <div class="kpi-val" style="color: #60a5fa;">1,000</div>
+        <div class="kpi-sub">Source: Enterprise Orders CSV</div>
+      </div>
+      <div class="kpi-card emerald">
+        <div class="kpi-label">Clean Validated Records</div>
+        <div class="kpi-val" style="color: #34d399;">950</div>
+        <div class="kpi-sub"><span class="trend-up">100% Validated</span> • 0 Nulls</div>
+      </div>
+      <div class="kpi-card purple">
+        <div class="kpi-label">Overall Quality Score</div>
+        <div class="kpi-val" style="color: #c084fc;">99.9%</div>
+        <div class="kpi-sub"><span class="trend-up">+18.3%</span> from raw 81.6%</div>
+      </div>
+      <div class="kpi-card amber">
+        <div class="kpi-label">Anomalies Resolved</div>
+        <div class="kpi-val" style="color: #fbbf24;">1,519</div>
+        <div class="kpi-sub">Deduplicated, Imputed, Standardized</div>
+      </div>
+    </div>
+
+    <!-- Data Quality Dimensions & Architecture -->
+    <div class="grid-2col">
+      <div class="card">
+        <div class="card-header">
+          <h2>Data Governance: 5 Quality Dimensions</h2>
+          <span class="pill pill-green">Post-Clean Verified</span>
+        </div>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">
+          Comparison of standardized governance criteria evaluating dataset completeness, uniqueness, validity, consistency, and mathematical accuracy.
+        </p>
+        <div class="dim-list">
+          <div class="dim-row">
+            <div class="dim-info">
+              <span>Completeness (Missingness zeroed)</span>
+              <span><span style="color: var(--rose);">88.4%</span> &rarr; <span style="color: var(--emerald);">100%</span></span>
+            </div>
+            <div class="dim-track">
+              <div class="dim-fill" style="width: 100%;"></div>
+            </div>
+          </div>
+          <div class="dim-row">
+            <div class="dim-info">
+              <span>Uniqueness (Duplicates purged)</span>
+              <span><span style="color: var(--rose);">95.0%</span> &rarr; <span style="color: var(--emerald);">100%</span></span>
+            </div>
+            <div class="dim-track">
+              <div class="dim-fill" style="width: 100%;"></div>
+            </div>
+          </div>
+          <div class="dim-row">
+            <div class="dim-info">
+              <span>Validity (Rule &amp; Type compliance)</span>
+              <span><span style="color: var(--rose);">78.2%</span> &rarr; <span style="color: var(--emerald);">99.8%</span></span>
+            </div>
+            <div class="dim-track">
+              <div class="dim-fill" style="width: 99.8%;"></div>
+            </div>
+          </div>
+          <div class="dim-row">
+            <div class="dim-info">
+              <span>Consistency (Standard ISO dates &amp; naming)</span>
+              <span><span style="color: var(--rose);">64.5%</span> &rarr; <span style="color: var(--emerald);">100%</span></span>
+            </div>
+            <div class="dim-track">
+              <div class="dim-fill" style="width: 100%;"></div>
+            </div>
+          </div>
+          <div class="dim-row">
+            <div class="dim-info">
+              <span>Accuracy (Audit checked line totals)</span>
+              <span><span style="color: var(--rose);">81.2%</span> &rarr; <span style="color: var(--emerald);">99.6%</span></span>
+            </div>
+            <div class="dim-track">
+              <div class="dim-fill" style="width: 99.6%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pipeline Execution Card -->
+      <div class="card">
+        <div class="card-header">
+          <h2>Pipeline Execution Audit</h2>
+          <span class="pill pill-blue">5 Stages Passed</span>
+        </div>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">
+          Automated multi-stage execution log summary:
+        </p>
+        <div style="display: flex; flex-direction: column; gap: 14px; font-size: 13px;">
+          <div style="background: var(--bg-card); padding: 12px 16px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <strong>1. Deduplication</strong>
+              <div style="font-size: 11px; color: var(--text-muted);">Exact &amp; primary key duplicate hash match</div>
+            </div>
+            <span class="pill pill-green">-50 Rows</span>
+          </div>
+          <div style="background: var(--bg-card); padding: 12px 16px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <strong>2. Missing Value Imputation</strong>
+              <div style="font-size: 11px; color: var(--text-muted);">Mode &amp; median statistical imputation</div>
+            </div>
+            <span class="pill pill-green">238 Imputed</span>
+          </div>
+          <div style="background: var(--bg-card); padding: 12px 16px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <strong>3. Text &amp; Categorical Mapping</strong>
+              <div style="font-size: 11px; color: var(--text-muted);">Regex casing &amp; country/payment canonical aliases</div>
+            </div>
+            <span class="pill pill-green">761 Fixed</span>
+          </div>
+          <div style="background: var(--bg-card); padding: 12px 16px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <strong>4. Date Harmonization</strong>
+              <div style="font-size: 11px; color: var(--text-muted);">Converted mixed formats to ISO-8601 (YYYY-MM-DD)</div>
+            </div>
+            <span class="pill pill-green">403 Harmonized</span>
+          </div>
+          <div style="background: var(--bg-card); padding: 12px 16px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <strong>5. Numerical Bounds &amp; Audit</strong>
+              <div style="font-size: 11px; color: var(--text-muted);">Removed symbols, capped negatives, audited totals</div>
+            </div>
+            <span class="pill pill-green">67 Sanitized</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cleaned Dataset Interactive Preview -->
+    <div class="card">
+      <div class="card-header">
+        <h2>Cleaned Enterprise Dataset Live Explorer</h2>
+        <div style="display: flex; gap: 10px;">
+          <a href="../data/cleaned_enterprise_data.csv" download class="btn">
+            &darr; Download Cleaned CSV
+          </a>
+        </div>
+      </div>
+      <div class="filter-bar">
+        <input type="text" id="searchInput" class="filter-input" placeholder="Search by customer name, country, or category..." onkeyup="filterTable()">
+        <span style="font-size: 12px; color: var(--text-muted);" id="rowCountLabel">Showing 10 of 950 clean records</span>
+      </div>
+
+      <div class="table-container">
+        <table id="dataTable">
+          <thead>
+            <tr>
+              <th>Txn ID</th>
+              <th>Customer Name</th>
+              <th>Email</th>
+              <th>Country</th>
+              <th>Order Date (ISO)</th>
+              <th>Category</th>
+              <th>Qty</th>
+              <th>Unit Price</th>
+              <th>Audited Total</th>
+              <th>Payment</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <!-- Sample rows rendered -->
+            <tr><td>TXN-1001</td><td>James Smith</td><td>james.smith@enterprise.com</td><td>United States</td><td>2025-03-14</td><td>Electronics</td><td>2</td><td>$340.50</td><td><strong>$681.00</strong></td><td>Credit Card</td><td><span class="pill pill-green">Delivered</span></td></tr>
+            <tr><td>TXN-1002</td><td>Mary Johnson</td><td>mary.johnson@gmail.com</td><td>United Kingdom</td><td>2025-07-22</td><td>Home &amp; Kitchen</td><td>1</td><td>$145.00</td><td><strong>$145.00</strong></td><td>PayPal</td><td><span class="pill pill-green">Shipped</span></td></tr>
+            <tr><td>TXN-1003</td><td>John Williams</td><td>john.williams@enterprise.com</td><td>Canada</td><td>2025-01-09</td><td>Apparel</td><td>3</td><td>$48.00</td><td><strong>$144.00</strong></td><td>Credit Card</td><td><span class="pill pill-green">Delivered</span></td></tr>
+            <tr><td>TXN-1004</td><td>Patricia Brown</td><td>patricia.brown@gmail.com</td><td>Germany</td><td>2025-11-04</td><td>Books</td><td>4</td><td>$24.50</td><td><strong>$98.00</strong></td><td>Cash on Delivery</td><td><span class="pill pill-green">Delivered</span></td></tr>
+            <tr><td>TXN-1005</td><td>Robert Jones</td><td>robert.jones@enterprise.com</td><td>United States</td><td>2025-05-18</td><td>Electronics</td><td>1</td><td>$410.00</td><td><strong>$410.00</strong></td><td>Credit Card</td><td><span class="pill pill-green">Delivered</span></td></tr>
+            <tr><td>TXN-1006</td><td>Jennifer Garcia</td><td>jennifer.garcia@gmail.com</td><td>United States</td><td>2025-09-30</td><td>Home &amp; Kitchen</td><td>2</td><td>$89.90</td><td><strong>$179.80</strong></td><td>PayPal</td><td><span class="pill pill-green">Shipped</span></td></tr>
+            <tr><td>TXN-1007</td><td>Michael Miller</td><td>michael.miller@enterprise.com</td><td>United Kingdom</td><td>2025-02-12</td><td>Apparel</td><td>1</td><td>$75.00</td><td><strong>$75.00</strong></td><td>Credit Card</td><td><span class="pill pill-green">Delivered</span></td></tr>
+            <tr><td>TXN-1008</td><td>Linda Davis</td><td>linda.davis@gmail.com</td><td>Canada</td><td>2025-08-19</td><td>Books</td><td>2</td><td>$32.00</td><td><strong>$64.00</strong></td><td>Credit Card</td><td><span class="pill pill-green">Delivered</span></td></tr>
+            <tr><td>TXN-1009</td><td>William Rodriguez</td><td>william.rodriguez@enterprise.com</td><td>United States</td><td>2025-04-25</td><td>Electronics</td><td>3</td><td>$180.00</td><td><strong>$540.00</strong></td><td>PayPal</td><td><span class="pill pill-green">Pending</span></td></tr>
+            <tr><td>TXN-1010</td><td>Elizabeth Martinez</td><td>elizabeth.martinez@gmail.com</td><td>Germany</td><td>2025-12-01</td><td>Home &amp; Kitchen</td><td>1</td><td>$125.00</td><td><strong>$125.00</strong></td><td>Credit Card</td><td><span class="pill pill-green">Delivered</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2026 Thiranex Internship • Data Cleaning &amp; Reporting Automation Pipeline (Project 4)
+  </footer>
+
+  <script>
+    function filterTable() {
+      const input = document.getElementById('searchInput');
+      const filter = input.value.toLowerCase();
+      const tbody = document.getElementById('tableBody');
+      const trs = tbody.getElementsByTagName('tr');
+      let count = 0;
+
+      for (let i = 0; i < trs.length; i++) {
+        const text = trs[i].textContent.toLowerCase();
+        if (text.indexOf(filter) > -1) {
+          trs[i].style.display = '';
+          count++;
+        } else {
+          trs[i].style.display = 'none';
+        }
+      }
+      document.getElementById('rowCountLabel').innerText = 'Showing ' + count + ' matched records';
+    }
+  </script>
+</body>
+</html>

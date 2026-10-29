@@ -1,0 +1,118 @@
+{
+  "pipeline_run_timestamp": "2026-10-29T12:00:00Z",
+  "total_raw_records": 1000,
+  "total_clean_records": 950,
+  "records_dropped_duplicates": 50,
+  "quality_dimensions": {
+    "completeness": {
+      "before": 88.4,
+      "after": 100,
+      "unit": "%"
+    },
+    "uniqueness": {
+      "before": 95,
+      "after": 100,
+      "unit": "%"
+    },
+    "validity": {
+      "before": 78.2,
+      "after": 99.8,
+      "unit": "%"
+    },
+    "consistency": {
+      "before": 64.5,
+      "after": 100,
+      "unit": "%"
+    },
+    "accuracy": {
+      "before": 81.2,
+      "after": 99.6,
+      "unit": "%"
+    },
+    "overall_quality_score": {
+      "before": 81.5,
+      "after": 99.9,
+      "unit": "%"
+    }
+  },
+  "stages_summary": [
+    {
+      "stage_name": "Deduplication",
+      "description": "Identified and purged exact and primary-key duplicates based on Transaction_ID and order footprint",
+      "records_affected": 50,
+      "status": "Passed"
+    },
+    {
+      "stage_name": "Missing Value Imputation",
+      "description": "Imputed missing customer names (default Guest), countries (mode), quantities (median 1), and prices (category median)",
+      "records_affected": 238,
+      "status": "Passed"
+    },
+    {
+      "stage_name": "Text & Categorical Standardization",
+      "description": "Stripped leading/trailing whitespace, harmonized casing, normalized country codes (US/USA -> United States) and payment methods (CC/credit_card -> Credit Card)",
+      "records_affected": 761,
+      "status": "Passed"
+    },
+    {
+      "stage_name": "Temporal Date Harmonization",
+      "description": "Parsed mixed datetime formats (DD/MM/YYYY, MM-DD-YYYY, YYYY/MM/DD) into ISO-8601 standard YYYY-MM-DD",
+      "records_affected": 403,
+      "status": "Passed"
+    },
+    {
+      "stage_name": "Numeric Sanitization & Outlier Bounds",
+      "description": "Removed currency symbols ($) and commas, eliminated negative quantities/prices, and recomputed audited Total_Amount",
+      "records_affected": 67,
+      "status": "Passed"
+    }
+  ],
+  "category_breakdown": [
+    {
+      "category": "Electronics",
+      "count": 245,
+      "total_revenue": 67320.5,
+      "avg_price": 274.78
+    },
+    {
+      "category": "Home & Kitchen",
+      "count": 238,
+      "total_revenue": 25140.2,
+      "avg_price": 105.63
+    },
+    {
+      "category": "Apparel",
+      "count": 232,
+      "total_revenue": 13920.8,
+      "avg_price": 60
+    },
+    {
+      "category": "Books",
+      "count": 235,
+      "total_revenue": 6580.4,
+      "avg_price": 28
+    }
+  ],
+  "country_breakdown": [
+    {
+      "country": "United States",
+      "count": 485,
+      "revenue": 58240.5
+    },
+    {
+      "country": "United Kingdom",
+      "count": 190,
+      "revenue": 22890.2
+    },
+    {
+      "country": "Canada",
+      "count": 145,
+      "revenue": 17450.4
+    },
+    {
+      "country": "Germany",
+      "count": 130,
+      "revenue": 14380.8
+    }
+  ]
+}

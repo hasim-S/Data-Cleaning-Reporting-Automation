@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="pipeBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090d16"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="cardGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#60a5fa"/>
+    </linearGradient>
+    <linearGradient id="cardGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
+    <linearGradient id="cardGrad3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ec4899"/>
+      <stop offset="100%" stop-color="#f472b6"/>
+    </linearGradient>
+    <linearGradient id="cardGrad4" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#fbbf24"/>
+    </linearGradient>
+    <linearGradient id="cardGrad5" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#34d399"/>
+    </linearGradient>
+    <filter id="fShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <rect width="900" height="520" rx="16" fill="url(#pipeBg)"/>
+
+  <text x="40" y="50" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="700" fill="#f8fafc">Automated Data Cleaning Pipeline Architecture</text>
+  <text x="40" y="76" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#94a3b8">Multi-stage pipeline execution: from raw ingestion to enterprise-grade validated dataset</text>
+
+  <!-- Step 1 -->
+  <g transform="translate(50, 110)">
+    <rect width="140" height="340" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1.5" filter="url(#fShadow)"/>
+    <rect width="140" height="42" rx="12" fill="url(#cardGrad1)"/>
+    <text x="70" y="26" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">1. Ingestion</text>
+    <text x="70" y="75" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="800" fill="#60a5fa" text-anchor="middle">1,000</text>
+    <text x="70" y="95" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">Raw Records</text>
+    <line x1="20" y1="115" x2="120" y2="115" stroke="#334155"/>
+    <text x="15" y="140" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#cbd5e1">• CSV Ingestion</text>
+    <text x="15" y="165" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#cbd5e1">• Schema audit</text>
+    <text x="15" y="190" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#cbd5e1">• Type inference</text>
+    <text x="15" y="215" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#cbd5e1">• Null diagnostics</text>
+    <rect x="15" y="280" width="110" height="28" rx="6" fill="#0f172a"/>
+    <text x="70" y="298" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#93c5fd" text-anchor="middle">Quality: 71.4%</text>
+  </g>
+
+  <!-- Arrow 1 -->
+  <path d="M 200 280 L 215 280" stroke="#60a5fa" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Step 2 -->
+  <g transform="translate(215, 110)">
+    <rect width="140" height="340" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1.5" filter="url(#fShadow)"/>
+    <rect width="140" height="42" rx="12" fill="url(#cardGrad2)"/>
+    <text x="70" y="26" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">2. Deduplication</text>
+    <text x="70" y="75" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="800" fill="#a78bfa" text-anchor="middle">-50</text>
+    <text x="70" y="95" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">Duplicates Purged</text>
+    <line x1="20" y1="115" x2="120" y2="115" stroke="#334155"/>
+    <text x="15" y="140" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#cbd5e1">• Primary Key hash</text>
+    <text x="15" y="165" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#cbd5e1">• Subset matching</text>
+    <text x="15" y="190" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#cbd5e1">• First record kept</text>
+    <text x="15" y="215" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#cbd5e1">• Audit logged</text>
+    <rect x="15" y="280" width="110" height="28" rx="6" fill="#0f172a"/>
+    <text x="70" y="298" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#c4b5fd" text-anchor="middle">950 Unique</text>
+  </g>
+
+  <!-- Step 3 -->
+  <g transform="translate(380, 110)">
+    <rect width="140" height="340" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1.5" filter="url(#fShadow)"/>
+    <rect width="140" height="42" rx="12" fill="url(#cardGrad3)"/>
+    <text x="70" y="26" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">3. Imputation</text>
+    <text x="70" y="75" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="800" fill="#f472b6" text-anchor="middle">238</text>
+    <text x="70" y="95" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">Nulls Imputed</text>
+    <line x1="20" y1="115" x2="120" y2="115" stroke="#334155"/>
+    <text x="15" y="140" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#cbd5e1">• Country mode</text>
+    <text x="15" y="165" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#cbd5e1">• Quantity median</text>
+    <text x="15" y="190" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#cbd5e1">• Price by category</text>
+    <text x="15" y="215" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#cbd5e1">• Guest placeholder</text>
+    <rect x="15" y="280" width="110" height="28" rx="6" fill="#0f172a"/>
+    <text x="70" y="298" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#fbcfe8" text-anchor="middle">0 Missing Left</text>
+  </g>
+
+  <!-- Step 4 -->
+  <g transform="translate(545, 110)">
+    <rect width="140" height="340" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1.5" filter="url(#fShadow)"/>
+    <rect width="140" height="42" rx="12" fill="url(#cardGrad4)"/>
+    <text x="70" y="26" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">4. Standardize</text>
+    <text x="70" y="75" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="800" fill="#fbbf24" text-anchor="middle">1,164</text>
+    <text x="70" y="95" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">Items Corrected</text>
+    <line x1="20" y1="115" x2="120" y2="115" stroke="#334155"/>
+    <text x="15" y="140" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#cbd5e1">• ISO-8601 Dates</text>
+    <text x="15" y="165" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#cbd5e1">• Regex trim & case</text>
+    <text x="15" y="190" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#cbd5e1">• Country aliases</text>
+    <text x="15" y="215" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#cbd5e1">• Currency symbols</text>
+    <rect x="15" y="280" width="110" height="28" rx="6" fill="#0f172a"/>
+    <text x="70" y="298" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#fde68a" text-anchor="middle">100% Consistent</text>
+  </g>
+
+  <!-- Step 5 -->
+  <g transform="translate(710, 110)">
+    <rect width="140" height="340" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1.5" filter="url(#fShadow)"/>
+    <rect width="140" height="42" rx="12" fill="url(#cardGrad5)"/>
+    <text x="70" y="26" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#fff" text-anchor="middle">5. Delivery</text>
+    <text x="70" y="75" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="800" fill="#34d399" text-anchor="middle">950</text>
+    <text x="70" y="95" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">Clean Records</text>
+    <line x1="20" y1="115" x2="120" y2="115" stroke="#334155"/>
+    <text x="15" y="140" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#cbd5e1">• Validated CSV</text>
+    <text x="15" y="165" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#cbd5e1">• Audit Trail JSON</text>
+    <text x="15" y="190" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#cbd5e1">• Executive HTML</text>
+    <text x="15" y="215" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#cbd5e1">• Live Dashboard</text>
+    <rect x="15" y="280" width="110" height="28" rx="6" fill="#0f172a"/>
+    <text x="70" y="298" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#6ee7b7" text-anchor="middle">Quality: 99.9%</text>
+  </g>
+</svg>
